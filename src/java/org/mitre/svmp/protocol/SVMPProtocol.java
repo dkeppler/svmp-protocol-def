@@ -295,6 +295,16 @@ public final class SVMPProtocol {
      * <code>optional .svmp.Intent intent = 7;</code>
      */
     org.mitre.svmp.protocol.SVMPProtocol.Intent getIntent();
+
+    // optional .svmp.WebRTCMessage webrtcMsg = 9;
+    /**
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+     */
+    boolean hasWebrtcMsg();
+    /**
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+     */
+    org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getWebrtcMsg();
   }
   /**
    * Protobuf type {@code svmp.Request}
@@ -430,6 +440,19 @@ public final class SVMPProtocol {
               bitField0_ |= 0x00000040;
               break;
             }
+            case 74: {
+              org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                subBuilder = webrtcMsg_.toBuilder();
+              }
+              webrtcMsg_ = input.readMessage(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(webrtcMsg_);
+                webrtcMsg_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000080;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -497,6 +520,10 @@ public final class SVMPProtocol {
        * <code>VIDEO_STOP = 8;</code>
        */
       VIDEO_STOP(8, 8),
+      /**
+       * <code>WEBRTC = 9;</code>
+       */
+      WEBRTC(9, 9),
       ;
 
       /**
@@ -535,6 +562,10 @@ public final class SVMPProtocol {
        * <code>VIDEO_STOP = 8;</code>
        */
       public static final int VIDEO_STOP_VALUE = 8;
+      /**
+       * <code>WEBRTC = 9;</code>
+       */
+      public static final int WEBRTC_VALUE = 9;
 
 
       public final int getNumber() { return value; }
@@ -550,6 +581,7 @@ public final class SVMPProtocol {
           case 6: return SCREENINFO;
           case 7: return VIDEO_START;
           case 8: return VIDEO_STOP;
+          case 9: return WEBRTC;
           default: return null;
         }
       }
@@ -688,6 +720,22 @@ public final class SVMPProtocol {
       return intent_;
     }
 
+    // optional .svmp.WebRTCMessage webrtcMsg = 9;
+    public static final int WEBRTCMSG_FIELD_NUMBER = 9;
+    private org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage webrtcMsg_;
+    /**
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+     */
+    public boolean hasWebrtcMsg() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+     */
+    public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getWebrtcMsg() {
+      return webrtcMsg_;
+    }
+
     private void initFields() {
       type_ = org.mitre.svmp.protocol.SVMPProtocol.Request.RequestType.USERAUTH;
       authentication_ = org.mitre.svmp.protocol.SVMPProtocol.Authentication.getDefaultInstance();
@@ -696,6 +744,7 @@ public final class SVMPProtocol {
       sensor_ = org.mitre.svmp.protocol.SVMPProtocol.SensorEvent.getDefaultInstance();
       locationRequest_ = org.mitre.svmp.protocol.SVMPProtocol.LocationRequest.getDefaultInstance();
       intent_ = org.mitre.svmp.protocol.SVMPProtocol.Intent.getDefaultInstance();
+      webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -742,6 +791,12 @@ public final class SVMPProtocol {
           return false;
         }
       }
+      if (hasWebrtcMsg()) {
+        if (!getWebrtcMsg().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -769,6 +824,9 @@ public final class SVMPProtocol {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeMessage(7, intent_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeMessage(9, webrtcMsg_);
       }
     }
 
@@ -805,6 +863,10 @@ public final class SVMPProtocol {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, intent_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, webrtcMsg_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -915,6 +977,8 @@ public final class SVMPProtocol {
         bitField0_ = (bitField0_ & ~0x00000020);
         intent_ = org.mitre.svmp.protocol.SVMPProtocol.Intent.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000040);
+        webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -966,6 +1030,10 @@ public final class SVMPProtocol {
           to_bitField0_ |= 0x00000040;
         }
         result.intent_ = intent_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.webrtcMsg_ = webrtcMsg_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -992,6 +1060,9 @@ public final class SVMPProtocol {
         }
         if (other.hasIntent()) {
           mergeIntent(other.getIntent());
+        }
+        if (other.hasWebrtcMsg()) {
+          mergeWebrtcMsg(other.getWebrtcMsg());
         }
         return this;
       }
@@ -1033,6 +1104,12 @@ public final class SVMPProtocol {
         }
         if (hasIntent()) {
           if (!getIntent().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasWebrtcMsg()) {
+          if (!getWebrtcMsg().isInitialized()) {
             
             return false;
           }
@@ -1461,6 +1538,67 @@ public final class SVMPProtocol {
         return this;
       }
 
+      // optional .svmp.WebRTCMessage webrtcMsg = 9;
+      private org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
+      /**
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+       */
+      public boolean hasWebrtcMsg() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+       */
+      public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getWebrtcMsg() {
+        return webrtcMsg_;
+      }
+      /**
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+       */
+      public Builder setWebrtcMsg(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        webrtcMsg_ = value;
+
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+       */
+      public Builder setWebrtcMsg(
+          org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.Builder builderForValue) {
+        webrtcMsg_ = builderForValue.build();
+
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+       */
+      public Builder mergeWebrtcMsg(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage value) {
+        if (((bitField0_ & 0x00000080) == 0x00000080) &&
+            webrtcMsg_ != org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance()) {
+          webrtcMsg_ =
+            org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.newBuilder(webrtcMsg_).mergeFrom(value).buildPartial();
+        } else {
+          webrtcMsg_ = value;
+        }
+
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 9;</code>
+       */
+      public Builder clearWebrtcMsg() {
+        webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
+
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:svmp.Request)
     }
 
@@ -1540,23 +1678,15 @@ public final class SVMPProtocol {
      */
     org.mitre.svmp.protocol.SVMPProtocol.ScreenInfo getScreenInfo();
 
-    // optional .svmp.VideoStreamInfo video_info = 17;
+    // optional .svmp.WebRTCMessage webrtcMsg = 17;
     /**
-     * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-     *
-     * <pre>
-     * placeholder for future use
-     * </pre>
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
      */
-    boolean hasVideoInfo();
+    boolean hasWebrtcMsg();
     /**
-     * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-     *
-     * <pre>
-     * placeholder for future use
-     * </pre>
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
      */
-    org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo getVideoInfo();
+    org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getWebrtcMsg();
   }
   /**
    * Protobuf type {@code svmp.Response}
@@ -1672,14 +1802,14 @@ public final class SVMPProtocol {
               break;
             }
             case 138: {
-              org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.Builder subBuilder = null;
+              org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.Builder subBuilder = null;
               if (((bitField0_ & 0x00000040) == 0x00000040)) {
-                subBuilder = videoInfo_.toBuilder();
+                subBuilder = webrtcMsg_.toBuilder();
               }
-              videoInfo_ = input.readMessage(org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.PARSER, extensionRegistry);
+              webrtcMsg_ = input.readMessage(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(videoInfo_);
-                videoInfo_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(webrtcMsg_);
+                webrtcMsg_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000040;
               break;
@@ -1744,13 +1874,13 @@ public final class SVMPProtocol {
        */
       SCREENINFO(3, 3),
       /**
-       * <code>VIDSTREAMINFO = 4;</code>
+       * <code>WEBRTC = 4;</code>
        *
        * <pre>
        * IP/Port info for video stream
        * </pre>
        */
-      VIDSTREAMINFO(4, 4),
+      WEBRTC(4, 4),
       /**
        * <code>INTENT = 5;</code>
        *
@@ -1822,13 +1952,13 @@ public final class SVMPProtocol {
        */
       public static final int SCREENINFO_VALUE = 3;
       /**
-       * <code>VIDSTREAMINFO = 4;</code>
+       * <code>WEBRTC = 4;</code>
        *
        * <pre>
        * IP/Port info for video stream
        * </pre>
        */
-      public static final int VIDSTREAMINFO_VALUE = 4;
+      public static final int WEBRTC_VALUE = 4;
       /**
        * <code>INTENT = 5;</code>
        *
@@ -1879,7 +2009,7 @@ public final class SVMPProtocol {
           case 1: return AUTHOK;
           case 2: return VMREADY;
           case 3: return SCREENINFO;
-          case 4: return VIDSTREAMINFO;
+          case 4: return WEBRTC;
           case 5: return INTENT;
           case 6: return NOTIFICATION;
           case 7: return LOCATION;
@@ -2035,28 +2165,20 @@ public final class SVMPProtocol {
       return screenInfo_;
     }
 
-    // optional .svmp.VideoStreamInfo video_info = 17;
-    public static final int VIDEO_INFO_FIELD_NUMBER = 17;
-    private org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo videoInfo_;
+    // optional .svmp.WebRTCMessage webrtcMsg = 17;
+    public static final int WEBRTCMSG_FIELD_NUMBER = 17;
+    private org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage webrtcMsg_;
     /**
-     * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-     *
-     * <pre>
-     * placeholder for future use
-     * </pre>
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
      */
-    public boolean hasVideoInfo() {
+    public boolean hasWebrtcMsg() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-     *
-     * <pre>
-     * placeholder for future use
-     * </pre>
+     * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
      */
-    public org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo getVideoInfo() {
-      return videoInfo_;
+    public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getWebrtcMsg() {
+      return webrtcMsg_;
     }
 
     private void initFields() {
@@ -2066,7 +2188,7 @@ public final class SVMPProtocol {
       notification_ = org.mitre.svmp.protocol.SVMPProtocol.Notification.getDefaultInstance();
       locationResponse_ = org.mitre.svmp.protocol.SVMPProtocol.LocationResponse.getDefaultInstance();
       screenInfo_ = org.mitre.svmp.protocol.SVMPProtocol.ScreenInfo.getDefaultInstance();
-      videoInfo_ = org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance();
+      webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2101,6 +2223,12 @@ public final class SVMPProtocol {
           return false;
         }
       }
+      if (hasWebrtcMsg()) {
+        if (!getWebrtcMsg().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -2127,7 +2255,7 @@ public final class SVMPProtocol {
         output.writeMessage(16, screenInfo_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeMessage(17, videoInfo_);
+        output.writeMessage(17, webrtcMsg_);
       }
     }
 
@@ -2163,7 +2291,7 @@ public final class SVMPProtocol {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(17, videoInfo_);
+          .computeMessageSize(17, webrtcMsg_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -2272,7 +2400,7 @@ public final class SVMPProtocol {
         bitField0_ = (bitField0_ & ~0x00000010);
         screenInfo_ = org.mitre.svmp.protocol.SVMPProtocol.ScreenInfo.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000020);
-        videoInfo_ = org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance();
+        webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -2324,7 +2452,7 @@ public final class SVMPProtocol {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.videoInfo_ = videoInfo_;
+        result.webrtcMsg_ = webrtcMsg_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -2351,8 +2479,8 @@ public final class SVMPProtocol {
         if (other.hasScreenInfo()) {
           mergeScreenInfo(other.getScreenInfo());
         }
-        if (other.hasVideoInfo()) {
-          mergeVideoInfo(other.getVideoInfo());
+        if (other.hasWebrtcMsg()) {
+          mergeWebrtcMsg(other.getWebrtcMsg());
         }
         return this;
       }
@@ -2382,6 +2510,12 @@ public final class SVMPProtocol {
         }
         if (hasScreenInfo()) {
           if (!getScreenInfo().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasWebrtcMsg()) {
+          if (!getWebrtcMsg().isInitialized()) {
             
             return false;
           }
@@ -2762,86 +2896,62 @@ public final class SVMPProtocol {
         return this;
       }
 
-      // optional .svmp.VideoStreamInfo video_info = 17;
-      private org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo videoInfo_ = org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance();
+      // optional .svmp.WebRTCMessage webrtcMsg = 17;
+      private org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
       /**
-       * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-       *
-       * <pre>
-       * placeholder for future use
-       * </pre>
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
        */
-      public boolean hasVideoInfo() {
+      public boolean hasWebrtcMsg() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-       *
-       * <pre>
-       * placeholder for future use
-       * </pre>
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
        */
-      public org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo getVideoInfo() {
-        return videoInfo_;
+      public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getWebrtcMsg() {
+        return webrtcMsg_;
       }
       /**
-       * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-       *
-       * <pre>
-       * placeholder for future use
-       * </pre>
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
        */
-      public Builder setVideoInfo(org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo value) {
+      public Builder setWebrtcMsg(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        videoInfo_ = value;
+        webrtcMsg_ = value;
 
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-       *
-       * <pre>
-       * placeholder for future use
-       * </pre>
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
        */
-      public Builder setVideoInfo(
-          org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.Builder builderForValue) {
-        videoInfo_ = builderForValue.build();
+      public Builder setWebrtcMsg(
+          org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.Builder builderForValue) {
+        webrtcMsg_ = builderForValue.build();
 
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-       *
-       * <pre>
-       * placeholder for future use
-       * </pre>
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
        */
-      public Builder mergeVideoInfo(org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo value) {
+      public Builder mergeWebrtcMsg(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage value) {
         if (((bitField0_ & 0x00000040) == 0x00000040) &&
-            videoInfo_ != org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance()) {
-          videoInfo_ =
-            org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.newBuilder(videoInfo_).mergeFrom(value).buildPartial();
+            webrtcMsg_ != org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance()) {
+          webrtcMsg_ =
+            org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.newBuilder(webrtcMsg_).mergeFrom(value).buildPartial();
         } else {
-          videoInfo_ = value;
+          webrtcMsg_ = value;
         }
 
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .svmp.VideoStreamInfo video_info = 17;</code>
-       *
-       * <pre>
-       * placeholder for future use
-       * </pre>
+       * <code>optional .svmp.WebRTCMessage webrtcMsg = 17;</code>
        */
-      public Builder clearVideoInfo() {
-        videoInfo_ = org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance();
+      public Builder clearWebrtcMsg() {
+        webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
 
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
@@ -16727,40 +16837,126 @@ public final class SVMPProtocol {
     // @@protoc_insertion_point(class_scope:svmp.VideoRequest)
   }
 
-  public interface VideoStreamInfoOrBuilder
+  public interface WebRTCMessageOrBuilder
       extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required .svmp.WebRTCMessage.WebRTCType type = 1;
+    /**
+     * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+     */
+    boolean hasType();
+    /**
+     * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+     */
+    org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType getType();
+
+    // optional string sdp = 2;
+    /**
+     * <code>optional string sdp = 2;</code>
+     *
+     * <pre>
+     * type == offer || answer
+     * </pre>
+     */
+    boolean hasSdp();
+    /**
+     * <code>optional string sdp = 2;</code>
+     *
+     * <pre>
+     * type == offer || answer
+     * </pre>
+     */
+    java.lang.String getSdp();
+    /**
+     * <code>optional string sdp = 2;</code>
+     *
+     * <pre>
+     * type == offer || answer
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getSdpBytes();
+
+    // optional string id = 3;
+    /**
+     * <code>optional string id = 3;</code>
+     *
+     * <pre>
+     * type == candidate
+     * </pre>
+     */
+    boolean hasId();
+    /**
+     * <code>optional string id = 3;</code>
+     *
+     * <pre>
+     * type == candidate
+     * </pre>
+     */
+    java.lang.String getId();
+    /**
+     * <code>optional string id = 3;</code>
+     *
+     * <pre>
+     * type == candidate
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
+    // optional int32 labal = 4;
+    /**
+     * <code>optional int32 labal = 4;</code>
+     */
+    boolean hasLabal();
+    /**
+     * <code>optional int32 labal = 4;</code>
+     */
+    int getLabal();
+
+    // optional string candidate = 5;
+    /**
+     * <code>optional string candidate = 5;</code>
+     */
+    boolean hasCandidate();
+    /**
+     * <code>optional string candidate = 5;</code>
+     */
+    java.lang.String getCandidate();
+    /**
+     * <code>optional string candidate = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getCandidateBytes();
   }
   /**
-   * Protobuf type {@code svmp.VideoStreamInfo}
-   *
-   * <pre>
-   * S-&gt;C
-   * </pre>
+   * Protobuf type {@code svmp.WebRTCMessage}
    */
-  public static final class VideoStreamInfo extends
+  public static final class WebRTCMessage extends
       com.google.protobuf.GeneratedMessageLite
-      implements VideoStreamInfoOrBuilder {
-    // Use VideoStreamInfo.newBuilder() to construct.
-    private VideoStreamInfo(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      implements WebRTCMessageOrBuilder {
+    // Use WebRTCMessage.newBuilder() to construct.
+    private WebRTCMessage(com.google.protobuf.GeneratedMessageLite.Builder builder) {
       super(builder);
 
     }
-    private VideoStreamInfo(boolean noInit) {}
+    private WebRTCMessage(boolean noInit) {}
 
-    private static final VideoStreamInfo defaultInstance;
-    public static VideoStreamInfo getDefaultInstance() {
+    private static final WebRTCMessage defaultInstance;
+    public static WebRTCMessage getDefaultInstance() {
       return defaultInstance;
     }
 
-    public VideoStreamInfo getDefaultInstanceForType() {
+    public WebRTCMessage getDefaultInstanceForType() {
       return defaultInstance;
     }
 
-    private VideoStreamInfo(
+    private WebRTCMessage(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
+      int mutable_bitField0_ = 0;
       try {
         boolean done = false;
         while (!done) {
@@ -16776,6 +16972,35 @@ public final class SVMPProtocol {
               }
               break;
             }
+            case 8: {
+              int rawValue = input.readEnum();
+              org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType value = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType.valueOf(rawValue);
+              if (value != null) {
+                bitField0_ |= 0x00000001;
+                type_ = value;
+              }
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              sdp_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              id_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              labal_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              candidate_ = input.readBytes();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -16787,28 +17012,297 @@ public final class SVMPProtocol {
         makeExtensionsImmutable();
       }
     }
-    public static com.google.protobuf.Parser<VideoStreamInfo> PARSER =
-        new com.google.protobuf.AbstractParser<VideoStreamInfo>() {
-      public VideoStreamInfo parsePartialFrom(
+    public static com.google.protobuf.Parser<WebRTCMessage> PARSER =
+        new com.google.protobuf.AbstractParser<WebRTCMessage>() {
+      public WebRTCMessage parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new VideoStreamInfo(input, extensionRegistry);
+        return new WebRTCMessage(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<VideoStreamInfo> getParserForType() {
+    public com.google.protobuf.Parser<WebRTCMessage> getParserForType() {
       return PARSER;
     }
 
+    /**
+     * Protobuf enum {@code svmp.WebRTCMessage.WebRTCType}
+     */
+    public enum WebRTCType
+        implements com.google.protobuf.Internal.EnumLite {
+      /**
+       * <code>OFFER = 1;</code>
+       */
+      OFFER(0, 1),
+      /**
+       * <code>ANSWER = 2;</code>
+       */
+      ANSWER(1, 2),
+      /**
+       * <code>CANDIDATE = 3;</code>
+       */
+      CANDIDATE(2, 3),
+      /**
+       * <code>BYE = 4;</code>
+       */
+      BYE(3, 4),
+      ;
+
+      /**
+       * <code>OFFER = 1;</code>
+       */
+      public static final int OFFER_VALUE = 1;
+      /**
+       * <code>ANSWER = 2;</code>
+       */
+      public static final int ANSWER_VALUE = 2;
+      /**
+       * <code>CANDIDATE = 3;</code>
+       */
+      public static final int CANDIDATE_VALUE = 3;
+      /**
+       * <code>BYE = 4;</code>
+       */
+      public static final int BYE_VALUE = 4;
+
+
+      public final int getNumber() { return value; }
+
+      public static WebRTCType valueOf(int value) {
+        switch (value) {
+          case 1: return OFFER;
+          case 2: return ANSWER;
+          case 3: return CANDIDATE;
+          case 4: return BYE;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<WebRTCType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<WebRTCType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<WebRTCType>() {
+              public WebRTCType findValueByNumber(int number) {
+                return WebRTCType.valueOf(number);
+              }
+            };
+
+      private final int value;
+
+      private WebRTCType(int index, int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:svmp.WebRTCMessage.WebRTCType)
+    }
+
+    private int bitField0_;
+    // required .svmp.WebRTCMessage.WebRTCType type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType type_;
+    /**
+     * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+     */
+    public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType getType() {
+      return type_;
+    }
+
+    // optional string sdp = 2;
+    public static final int SDP_FIELD_NUMBER = 2;
+    private java.lang.Object sdp_;
+    /**
+     * <code>optional string sdp = 2;</code>
+     *
+     * <pre>
+     * type == offer || answer
+     * </pre>
+     */
+    public boolean hasSdp() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string sdp = 2;</code>
+     *
+     * <pre>
+     * type == offer || answer
+     * </pre>
+     */
+    public java.lang.String getSdp() {
+      java.lang.Object ref = sdp_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          sdp_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string sdp = 2;</code>
+     *
+     * <pre>
+     * type == offer || answer
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getSdpBytes() {
+      java.lang.Object ref = sdp_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sdp_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string id = 3;
+    public static final int ID_FIELD_NUMBER = 3;
+    private java.lang.Object id_;
+    /**
+     * <code>optional string id = 3;</code>
+     *
+     * <pre>
+     * type == candidate
+     * </pre>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string id = 3;</code>
+     *
+     * <pre>
+     * type == candidate
+     * </pre>
+     */
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          id_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string id = 3;</code>
+     *
+     * <pre>
+     * type == candidate
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 labal = 4;
+    public static final int LABAL_FIELD_NUMBER = 4;
+    private int labal_;
+    /**
+     * <code>optional int32 labal = 4;</code>
+     */
+    public boolean hasLabal() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 labal = 4;</code>
+     */
+    public int getLabal() {
+      return labal_;
+    }
+
+    // optional string candidate = 5;
+    public static final int CANDIDATE_FIELD_NUMBER = 5;
+    private java.lang.Object candidate_;
+    /**
+     * <code>optional string candidate = 5;</code>
+     */
+    public boolean hasCandidate() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string candidate = 5;</code>
+     */
+    public java.lang.String getCandidate() {
+      java.lang.Object ref = candidate_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          candidate_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string candidate = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCandidateBytes() {
+      java.lang.Object ref = candidate_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        candidate_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
+      type_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType.OFFER;
+      sdp_ = "";
+      id_ = "";
+      labal_ = 0;
+      candidate_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -16816,6 +17310,21 @@ public final class SVMPProtocol {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getSdpBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, labal_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getCandidateBytes());
+      }
     }
 
     private int memoizedSerializedSize = -1;
@@ -16824,6 +17333,26 @@ public final class SVMPProtocol {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getSdpBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getIdBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, labal_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getCandidateBytes());
+      }
       memoizedSerializedSize = size;
       return size;
     }
@@ -16835,53 +17364,53 @@ public final class SVMPProtocol {
       return super.writeReplace();
     }
 
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(byte[] data)
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(java.io.InputStream input)
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseDelimitedFrom(java.io.InputStream input)
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseDelimitedFrom(
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parseFrom(
+    public static org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -16890,23 +17419,19 @@ public final class SVMPProtocol {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo prototype) {
+    public static Builder newBuilder(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
     /**
-     * Protobuf type {@code svmp.VideoStreamInfo}
-     *
-     * <pre>
-     * S-&gt;C
-     * </pre>
+     * Protobuf type {@code svmp.WebRTCMessage}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo, Builder>
-        implements org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfoOrBuilder {
-      // Construct using org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.newBuilder()
+          org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage, Builder>
+        implements org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessageOrBuilder {
+      // Construct using org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -16919,6 +17444,16 @@ public final class SVMPProtocol {
 
       public Builder clear() {
         super.clear();
+        type_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType.OFFER;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        sdp_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        id_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        labal_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        candidate_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -16926,29 +17461,77 @@ public final class SVMPProtocol {
         return create().mergeFrom(buildPartial());
       }
 
-      public org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo getDefaultInstanceForType() {
-        return org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance();
+      public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getDefaultInstanceForType() {
+        return org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
       }
 
-      public org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo build() {
-        org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo result = buildPartial();
+      public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage build() {
+        org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo buildPartial() {
-        org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo result = new org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo(this);
+      public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage buildPartial() {
+        org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage result = new org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.sdp_ = sdp_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.labal_ = labal_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.candidate_ = candidate_;
+        result.bitField0_ = to_bitField0_;
         return result;
       }
 
-      public Builder mergeFrom(org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo other) {
-        if (other == org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance()) return this;
+      public Builder mergeFrom(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage other) {
+        if (other == org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasSdp()) {
+          bitField0_ |= 0x00000002;
+          sdp_ = other.sdp_;
+          
+        }
+        if (other.hasId()) {
+          bitField0_ |= 0x00000004;
+          id_ = other.id_;
+          
+        }
+        if (other.hasLabal()) {
+          setLabal(other.getLabal());
+        }
+        if (other.hasCandidate()) {
+          bitField0_ |= 0x00000010;
+          candidate_ = other.candidate_;
+          
+        }
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!hasType()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -16956,11 +17539,11 @@ public final class SVMPProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo parsedMessage = null;
+        org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo) e.getUnfinishedMessage();
+          parsedMessage = (org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -16969,16 +17552,356 @@ public final class SVMPProtocol {
         }
         return this;
       }
+      private int bitField0_;
 
-      // @@protoc_insertion_point(builder_scope:svmp.VideoStreamInfo)
+      // required .svmp.WebRTCMessage.WebRTCType type = 1;
+      private org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType type_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType.OFFER;
+      /**
+       * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+       */
+      public org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType getType() {
+        return type_;
+      }
+      /**
+       * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+       */
+      public Builder setType(org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required .svmp.WebRTCMessage.WebRTCType type = 1;</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.WebRTCType.OFFER;
+        
+        return this;
+      }
+
+      // optional string sdp = 2;
+      private java.lang.Object sdp_ = "";
+      /**
+       * <code>optional string sdp = 2;</code>
+       *
+       * <pre>
+       * type == offer || answer
+       * </pre>
+       */
+      public boolean hasSdp() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string sdp = 2;</code>
+       *
+       * <pre>
+       * type == offer || answer
+       * </pre>
+       */
+      public java.lang.String getSdp() {
+        java.lang.Object ref = sdp_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          sdp_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string sdp = 2;</code>
+       *
+       * <pre>
+       * type == offer || answer
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getSdpBytes() {
+        java.lang.Object ref = sdp_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sdp_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string sdp = 2;</code>
+       *
+       * <pre>
+       * type == offer || answer
+       * </pre>
+       */
+      public Builder setSdp(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        sdp_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional string sdp = 2;</code>
+       *
+       * <pre>
+       * type == offer || answer
+       * </pre>
+       */
+      public Builder clearSdp() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        sdp_ = getDefaultInstance().getSdp();
+        
+        return this;
+      }
+      /**
+       * <code>optional string sdp = 2;</code>
+       *
+       * <pre>
+       * type == offer || answer
+       * </pre>
+       */
+      public Builder setSdpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        sdp_ = value;
+        
+        return this;
+      }
+
+      // optional string id = 3;
+      private java.lang.Object id_ = "";
+      /**
+       * <code>optional string id = 3;</code>
+       *
+       * <pre>
+       * type == candidate
+       * </pre>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string id = 3;</code>
+       *
+       * <pre>
+       * type == candidate
+       * </pre>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          id_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 3;</code>
+       *
+       * <pre>
+       * type == candidate
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string id = 3;</code>
+       *
+       * <pre>
+       * type == candidate
+       * </pre>
+       */
+      public Builder setId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        id_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional string id = 3;</code>
+       *
+       * <pre>
+       * type == candidate
+       * </pre>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        id_ = getDefaultInstance().getId();
+        
+        return this;
+      }
+      /**
+       * <code>optional string id = 3;</code>
+       *
+       * <pre>
+       * type == candidate
+       * </pre>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        id_ = value;
+        
+        return this;
+      }
+
+      // optional int32 labal = 4;
+      private int labal_ ;
+      /**
+       * <code>optional int32 labal = 4;</code>
+       */
+      public boolean hasLabal() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 labal = 4;</code>
+       */
+      public int getLabal() {
+        return labal_;
+      }
+      /**
+       * <code>optional int32 labal = 4;</code>
+       */
+      public Builder setLabal(int value) {
+        bitField0_ |= 0x00000008;
+        labal_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional int32 labal = 4;</code>
+       */
+      public Builder clearLabal() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        labal_ = 0;
+        
+        return this;
+      }
+
+      // optional string candidate = 5;
+      private java.lang.Object candidate_ = "";
+      /**
+       * <code>optional string candidate = 5;</code>
+       */
+      public boolean hasCandidate() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string candidate = 5;</code>
+       */
+      public java.lang.String getCandidate() {
+        java.lang.Object ref = candidate_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          candidate_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string candidate = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCandidateBytes() {
+        java.lang.Object ref = candidate_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          candidate_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string candidate = 5;</code>
+       */
+      public Builder setCandidate(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        candidate_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional string candidate = 5;</code>
+       */
+      public Builder clearCandidate() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        candidate_ = getDefaultInstance().getCandidate();
+        
+        return this;
+      }
+      /**
+       * <code>optional string candidate = 5;</code>
+       */
+      public Builder setCandidateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        candidate_ = value;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:svmp.WebRTCMessage)
     }
 
     static {
-      defaultInstance = new VideoStreamInfo(true);
+      defaultInstance = new WebRTCMessage(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:svmp.VideoStreamInfo)
+    // @@protoc_insertion_point(class_scope:svmp.WebRTCMessage)
   }
 
 

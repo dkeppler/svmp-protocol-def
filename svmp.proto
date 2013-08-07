@@ -18,6 +18,8 @@ option optimize_for = LITE_RUNTIME;
 option java_package = "org.mitre.svmp.protocol";
 option java_outer_classname = "SVMPProtocol";
 
+import "webrtc.proto";
+
 // Client to server message wrapper
 message Request
 {
@@ -299,38 +301,4 @@ message VideoRequest {
   // e.g., resolution, bitrate, FEC, etc.
 
   // TODO
-}
-
-//=====================================================================
-// WebRTC Signalling
-//=====================================================================
-
-// Message format based on the Javascript Session Establishment Protocol (JSEP)
-// and the AppRTC demonstration app.
-
-// See https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-03
-
-// Things we won't implement in the first iteration but might be nice to have later on:
-// * ICE Trickling (3.4.1)
-// * Session Rehydration (3.6)
-// Together these might help speed up connection setup the first time and on
-// disconnect / reconnect.
-
-message WebRTCMessage {
-  enum WebRTCType {
-    OFFER = 1;
-    ANSWER = 2;
-    CANDIDATE = 3;
-    BYE = 4;
-  }
-
-  required WebRTCType type = 1;
-
-  // type == offer || answer
-  optional string sdp = 2;
-
-  // type == candidate
-  optional string id = 3;
-  optional int32 labal = 4;
-  optional string candidate = 5;
 }
